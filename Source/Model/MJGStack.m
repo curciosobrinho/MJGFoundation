@@ -13,7 +13,7 @@
 #import "MJGStack.h"
 
 @interface MJGStack ()
-@property (nonatomic, strong) NSMutableArray *objects;
+@property (nonatomic) NSMutableArray *objects;
 @end
 
 @implementation MJGStack
@@ -52,14 +52,13 @@
 }
 
 - (void)pushObjects:(NSArray*)objects {
-    for (id object in objects) {
-        [self pushObject:object];
-    }
+
+    [_objects addObjectsFromArray:objects];
 }
 
 - (id)popObject {
     if (_objects.count > 0) {
-        id object = [_objects objectAtIndex:(_objects.count - 1)];
+        id object = [_objects lastObject];
         [_objects removeLastObject];
         return object;
     }
@@ -68,7 +67,7 @@
 
 - (id)peekObject {
     if (_objects.count > 0) {
-        id object = [_objects objectAtIndex:(_objects.count - 1)];
+        id object = [_objects lastObject];
         return object;
     }
     return nil;
